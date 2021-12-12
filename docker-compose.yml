@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+    workspace:
+        build:
+            context: workspace
+            args:
+                - COMPOSER_VERSION=${COMPOSER_VERSION}
+                - PHP_VERSION=${PHP_VERSION}
+                - USER_GID=${USER_GID}
+                - USER_UID=${USER_UID}
+        volumes:
+            - ./project:/usr/share/nginx/html
+        working_dir: /usr/share/nginx/html
+        restart: unless-stopped
+        command: bash -c "tail -F anything"
